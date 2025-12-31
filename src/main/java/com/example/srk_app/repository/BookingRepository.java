@@ -16,8 +16,9 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     @Query("select b from Booking b left join fetch b.bookingRooms where b.bookingId = :bookingId")
     Optional<Booking> findWithRoomsByBookingId(@Param("bookingId") String bookingId);
 
-    @Query("select b from Booking b where b.user.id = :userId order by b.id desc")
-    List<Booking> findLastFiveByUserId(@Param("userId") Long userId);
+    // BookingRepository.java
+    List<Booking> findTop5ByUserIdOrderByIdDesc(Long userId);
+
     @Query("select b from Booking b order by b.id desc")
     List<Booking> findAllOrderByIdDesc();
     List<Booking> findByUserIdAndStatusOrderByIdDesc(Long userId, BookingStatus status);

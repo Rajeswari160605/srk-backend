@@ -97,10 +97,13 @@ public class BookingService {
     }
 
     // TEMP: last 5 bookings (no user filter yet)
+    // BookingService.java
+    // BookingService.java
     public List<Booking> getLastFiveBookingsForUser(Long userId) {
-        List<Booking> all = bookingRepository.findAllOrderByIdDesc();  // no user filter
-        return all.size() > 5 ? all.subList(0, 5) : all;
+        return bookingRepository.findTop5ByUserIdOrderByIdDesc(userId);
     }
+
+
 
     // ---------- SUMMARY ----------
     public BookingSummaryResponse getBookingSummary(String bookingId) {

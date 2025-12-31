@@ -27,14 +27,14 @@ public class BookingController {
     }
 
     // create booking (original backend flow)
-    @PostMapping
+  /*  @PostMapping
     public ResponseEntity<BookingDetailsDTO> createBooking(
             @RequestBody CreateBookingRequest request) {
 
         Booking booking = bookingService.createBooking(request);
         BookingDetailsDTO dto = bookingMapper.toDetailsDto(booking);
         return ResponseEntity.ok(dto);
-    }
+    }*/
 
     // get booking details (used by Booking Status screen)
     @GetMapping("/{bookingId}")
@@ -67,6 +67,9 @@ public class BookingController {
     // confirm + create booking from Android BookingRequest
     @PostMapping("/confirm")
     public ResponseEntity<BookingResponse> confirm(@RequestBody BookingRequest request) {
+        System.out.println("CONFIRM API: username=" + request.getUsername()
+                + ", phone=" + request.getPhoneNumber()
+                + ", userId=" + request.getUserId());
 
         CreateBookingRequest createReq = new CreateBookingRequest();
         createReq.setUsername(request.getUsername());
